@@ -37,6 +37,7 @@ function gameLoop() {
 snake.unshift(newHead);
 snake.pop();
 ctx.clearRect(0, 0, canvas.width, canvas.height);
+checkCollision();
 drawSnake();
     }
 
@@ -45,7 +46,7 @@ drawSnake();
     
 if (gameRunning == false) {
     gameRunning = true;
-    setInterval(gameLoop, 500);
+    setInterval(gameLoop, 300);
     //console.log(snake[0])
 }
     if (event.key == 'ArrowUp' && direction != 'down') {
@@ -60,8 +61,18 @@ if (gameRunning == false) {
         //console.log("tecla apertada, filho da puta", event.key)
 });
 
-
-
+function checkCollision() {
+if (snake[0].x >= canvas.width || snake[0].x < 0 || snake[0].y >= canvas.height || snake[0].y < 0) {
+    alert("Se Fudeu, bobão");
+    console.log("Game Over");
+    snake = [
+        {x: 350, y: 350},
+        {x: 330, y: 350}
+    ];
+    direction = 'null';
+    gameRunning = false;
+}
+}
 
 
 
